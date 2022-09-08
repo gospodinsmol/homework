@@ -12,11 +12,8 @@ int Mod(int divident, int divider)
     {
         return divident;
     }
-    else
-    {
-        divident -= divider;
-        return Mod(divident, divider);
-    }
+    divident -= divider;
+    return Mod(divident, divider);
 }
 
 Console.WriteLine($"Мод при делении числа {a} на число {b}: {Mod(a, b)}");

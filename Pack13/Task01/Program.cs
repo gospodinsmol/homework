@@ -14,9 +14,6 @@ double FuncRecurs(double xItem, int nItem)
     {
         return 1;
     }
-    else
-    {
-        return (xItem / nItem) * FuncRecurs(xItem,  (nItem - 1));
-    }
+    return (xItem / nItem) * FuncRecurs(xItem,  (nItem - 1));
 }
 Console.WriteLine($"Итог вычисления функции: {FuncRecurs(x, n)}");

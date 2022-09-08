@@ -4,7 +4,7 @@
 Console.WriteLine("Ввелите число n (n>1):");
 var n = int.Parse(Console.ReadLine());
 
-int Divs(int nValue, int divider = 2, int counter = 0)
+/*int Divs(int nValue, int divider = 2, int counter = 0)
 {
     if (nValue <= divider) return counter;
     else
@@ -13,6 +13,13 @@ int Divs(int nValue, int divider = 2, int counter = 0)
             counter++;
         return Divs(nValue, ++divider, counter);
     }
+}*/
+int Divs(int nValue, int divider = 2)
+{
+    if (nValue <= divider) return 0;
+    if (nValue % divider == 0)
+        return Divs(nValue, ++divider) + 1;
+    return Divs(nValue, ++divider);
 }
 
 Console.WriteLine($"Количество делителей n: {Divs(n)}");
