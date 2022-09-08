@@ -7,11 +7,11 @@ var n = int.Parse(Console.ReadLine());
 Console.WriteLine("Введите неотрицательное целое число s");
 var s = int.Parse(Console.ReadLine());
 
-bool Equal(int valueN, int valueS, int sum = 0)
+/*bool Equal(int valueN, int valueS, int sum = 0)
 {
     if (valueN < 1)
     {
-        return sum == valueS ? true : false;
+        return sum == valueS;
     }
     else
     {
@@ -19,5 +19,14 @@ bool Equal(int valueN, int valueS, int sum = 0)
         valueN /= 10;
         return Equal(valueN, valueS, sum);
     }
+}*/
+bool Equal(int valueN, int valueS)
+{
+    if (valueN < 10)
+    {
+        return valueN == valueS;
+    }
+
+    return Equal(valueN / 10, valueS - valueN % 10);
 }
 Console.WriteLine(Equal(n, s));

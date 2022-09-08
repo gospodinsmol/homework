@@ -6,14 +6,20 @@ Console.WriteLine("Введите целое неотрицательное чи
 var n = int.Parse(Console.ReadLine());
 const byte num = 3;
 
-int Head3(int valueN, int tenner = 10)
+/*int Head3(int valueN, int tenner = 10)
 {
-    if (valueN / tenner < 1)
-        return valueN + tenner * num;
+    if (valueN / 10 < 1)
+        return valueN + 10 * num;
     else
     {
         return Head3(valueN, tenner * 10);
     }
+}*/
+int Head3(int valueN)
+{
+    if (valueN / 10 < 1)
+        return valueN + 10 * num;
+    return 10 * Head3(valueN / 10) + valueN % 10;
 }
 
 Console.WriteLine(Head3(n));

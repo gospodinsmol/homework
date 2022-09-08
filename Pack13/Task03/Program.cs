@@ -6,22 +6,20 @@
 Console.WriteLine("Для определения степени числа 5, введите натуральное число:");
 var n = int.Parse(Console.ReadLine());
 
-int Degree5(int itemN, int degree = 0)
+int Degree5(int itemN)
 {
-    
-    if (itemN == 5)
+
+    if (itemN == 1)
     {
-        return ++degree;
+        return 0;
     }
-    else if (itemN % 5 > 0)
+    else if (itemN % 5 != 0)
     {
         return -1;
     }
-    else
-    {
-        ++degree;
-        return Degree5(itemN / 5, degree);
-    }
+
+    var degree = Degree5((itemN / 5));
+    return degree == -1 ? -1 : degree + 1;
 }
 
 Console.WriteLine($"Результат выполнения функции: {Degree5(n)}");
