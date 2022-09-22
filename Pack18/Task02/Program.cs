@@ -1,25 +1,19 @@
 ﻿// Дано число, вывести  его двоичное представление, используя только битовые операции.
 
-using System.Collections;
-
-Console.WriteLine("Введите число для перевод в двоичную систему");
+Console.WriteLine("Enter a number to convert to binary");
 var num = int.Parse(Console.ReadLine());
 
-Console.WriteLine($"Число {num} в двоичной системе: {ConvertToBit(num)}");
-Console.WriteLine(Convert.ToString(num,2));
+Console.WriteLine($"Number {num} in binary system: {ConvertToBit(num)}");
+Console.WriteLine(Convert.ToString(num, 2));
+
 string ConvertToBit(int input)
 {
-    var temp = string.Empty;
-    if (input != 1)
+    var result = string.Empty;
+    while (input > 0)
     {
-        temp += input & 1;
-        input = input >> 1;
-        return ConvertToBit(input) + temp;
+        result = result.PadLeft(result.Length + 1, (char)(input & 1));
+        input >>= 1;
     }
-    else
-    {
-        temp += "1";
-    }
-    return temp;
-    //return input == 1 ? "1" : ConvertToBit(input >>= 1) + (input & 1);
+
+    return result;
 }

@@ -5,70 +5,88 @@ Menu();
 
 void Menu()
 {
-    var value1 = 0;
-    var value2 = 0;
-    Console.WriteLine("Введите первое число");
-    if (int.TryParse(Console.ReadLine(), out var outValue1))
-    {
-        value1 = outValue1;
-    }
-    else
-    {
-        Console.WriteLine("Введите корректные значения");
-        Menu();
-    }
-
-    Console.WriteLine("Введите второе число");
-    if (int.TryParse(Console.ReadLine(), out var outValue2))
-    {
-        value2 = outValue2;
-    }
-    else
-    {
-        Console.WriteLine("Введите корректные значения");
-        Menu();
-    }
-    
-    Console.WriteLine("Введите операцию (*,+,-)");
-    var operat = Console.ReadLine();
-    if ("+/*^-()".IndexOf(operat) != -1 && operat.Length == 1)
-    {
-        var result = Calculation(value1, value2, operat[0]);
-        var resultBit = Convert.ToString(result, 2);
-        if (resultBit.Length % 8 != 0)
-        {
-            resultBit = string.Concat(Enumerable.Repeat("0", (8 - resultBit.Length % 8))) + resultBit; 
-        }
-
-        Console.WriteLine($"Введите номер байта от 1 до {resultBit.Length / 8}");
-        var numOfByte = int.Parse(Console.ReadLine());
-        if (numOfByte <= resultBit.Length && numOfByte >= 1)
-        {
-            var maxBit = numOfByte * 8;
-            resultBit = resultBit[(maxBit - 8)..(maxBit)];
-            result = Convert.ToInt32(resultBit, 2);
-            Console.WriteLine($"Выбранный байт это {resultBit} - {result}");
-        }
-        else
-        {
-            Console.WriteLine("Введены не верные значения. Повторите операции");
-            Menu();
-        }
-    }
-    else
-    {
-        Console.WriteLine("Введите корректные значения");
-        Menu();
-    }
+    Console.WriteLine("Please, enter first number");
+    var value1 = ReadInt();
+    Console.WriteLine("Please, enter second number");
+    var value2 = ReadInt();
+    Console.WriteLine("Please, enter operation (*,+,-)");
+    var operat = ReadOperator();
+    var result = Calculate(value1, value2, operat);
+    Console.WriteLine($"Please enter number of byte");
+    var selectedByteNumber = ReadNumberOfByte(result);
+    PrintByte(result, selectedByteNumber);
 }
 
-int Calculation(int valueA, int valueB, char operat)
+int Calculate(int valueA, int valueB, char operat)
 {
     return operat switch
     {
         '+' => valueA + valueB,
         '-' => valueA - valueB,
         '*' => valueA * valueB,
-        _ => 0
+        _ => throw new ArgumentOutOfRangeException()
     };
+}
+
+int ReadInt()
+{
+    while (true)
+    {
+        if (int.TryParse(Console.ReadLine(), out var outValue1))
+        {
+            return outValue1;
+        }
+        Console.WriteLine("Please enter valid values");
+    }
+}
+
+int ReadNumberOfByte(int inputNumber)
+{
+    var numberOfBit = Convert.ToString(inputNumber, 2).Length;
+    var numberOfByte = Convert.ToInt32(Math.Ceiling((double)numberOfBit / 8));
+    while (true)
+    {
+        if (int.TryParse(Console.ReadLine(), out var outValue1))
+        {
+            if (outValue1 <= numberOfByte && outValue1 > 0)
+            {
+                return outValue1;
+            }
+        }
+        Console.WriteLine($"Please enter valid values (from 1 to {numberOfByte})");
+    }
+}
+
+bool IsValidOperation(char input)
+{
+    return "+*-".IndexOf(input) != -1;
+}
+
+char ReadOperator()
+{
+    while (true)
+    {
+        if (char.TryParse(Console.ReadLine(), out var outValue))
+        {
+            if (IsValidOperation(outValue))
+            {
+                return outValue;
+            }
+        }
+        Console.WriteLine("Please enter valid values");
+    }
+}
+
+void PrintByte(int number, int byteNumber)
+{
+    var numberBit = Convert.ToString(number, 2);
+    
+    if (numberBit.Length % 8 != 0)
+    {
+        numberBit = numberBit.PadLeft(numberBit.Length + (8 - numberBit.Length % 8), '0');
+    }
+    var maxBit = byteNumber * 8;
+    numberBit = numberBit[(maxBit - 8)..(maxBit)];
+    number = Convert.ToInt32(numberBit, 2);
+    Console.WriteLine($"Selected byte is {numberBit} - {number}");
 }

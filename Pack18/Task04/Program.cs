@@ -1,20 +1,7 @@
 ﻿// Выяснить является ли число степенью двойки, используя битовые операции.
 
-Console.WriteLine("Введите число:");
+Console.WriteLine("Enter number:");
 var input = int.Parse(Console.ReadLine());
-var counter = 0;
-var item = 1;
-
-if (input == 0)
-{
-    Console.WriteLine("ноль не является степенью двойки");
-}
-while (item < input)
-{
-    item <<= 1;
-    counter++;
-}
-
-Console.WriteLine(item == input
-    ? $"Число {input} является {counter}й степенью 2ки"
-    : $"Число {input} не является степенью 2ки");
+Console.WriteLine( (input & (input - 1)) == 0
+    ? $"Number {input} is a power of two"
+    : $"Число {input} isn`t a power of two");
