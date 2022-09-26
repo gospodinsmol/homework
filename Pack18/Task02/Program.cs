@@ -3,10 +3,10 @@
 Console.WriteLine("Enter a number to convert to binary");
 var num = int.Parse(Console.ReadLine());
 
-Console.WriteLine($"Number {num} in binary system: {ConvertToBit(num)}");
+Console.WriteLine($"Number {num} in binary system: {ConvertToBinary(num)}");
 Console.WriteLine(Convert.ToString(num, 2));
 
-string ConvertToBit(int input)
+string ConvertToBinary(int input)
 {
     var result = string.Empty;
     while (input > 0)
