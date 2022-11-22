@@ -1,0 +1,9 @@
+Use the FileInfo class for typical operations such as copying, moving, renaming, creating, opening, deleting, and appending to files.
+
+If you are performing multiple operations on the same file, it can be more efficient to use FileInfo instance methods instead of the corresponding static methods of the File class, because a security check will not always be necessary.
+
+Many of the FileInfo methods return other I/O types when you create or open files. You can use these other types to further manipulate a file. For more information, see specific FileInfo members such as Open, OpenRead, OpenText, CreateText, or Create.
+
+By default, full read/write access to new files is granted to all users.
+
+The following table describes the enumerations that are used to customize the behavior of various FileInfo methods.
