@@ -1,0 +1,7 @@
+Minsk 112233 true
+Riga 223311 True
+Barselona 123 false
+Milan 29102 false
+Berlin 123 true
+Oslo 929 True
+Paris 666 false
